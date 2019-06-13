@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="{% url 'ad_messages:register_user' %}" method="post">
+    {% csrf_token %}
+    {{ register_user_form }}
+    <input type="submit" name="register_user" value="Submit">
+</form>
+
+{% endblock %}

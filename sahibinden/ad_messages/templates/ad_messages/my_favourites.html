@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if ads_list %}
+    <ul>
+        {% for ad in ads_list %}
+            <li>
+                <a href='{% url "ad_messages:detail" ad.ad.id %}'>{{ ad.ad.title }}{% if ad.ad.publish is not True %} *** Unpublished *** {% endif %} </a> 
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No ads are available.</p>
+{% endif %}
+
+{% endblock %}

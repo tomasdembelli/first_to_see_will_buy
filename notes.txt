@@ -1,0 +1,13 @@
+makemigrations	: prepares the models to be committed to the DB. It is like 'add' before 'commit' in git.
+python manage.py makemigrations polls
+migrate		: actually runs the SQL queries, committing them
+python manage.py migrate
+python manage.py sqlmigrate polls 0001		: this will show what exactly will be committed, without committing. Just display.
+python manage.py shell		: use it to interact with the project directly
+path('<int:argument>/', views.detail, name='detail') :captures only the integer part before the /, and sends it to the 'detail' function of 'views.py' which is expecting an 'argument', name 'argument'. If there is a string, returns error.
+path('<argument>/', ..) : captures everything.
+<a href='/...'></a> : href has to start with "/", otherwise it will create a relative path/url to the current page's address.
+model : Message() has Ad() foreign key. To see the Message()s fom foreignkeyed Ad():
+Ad.objects.get(id=1).message_set.all() : note that user lower case 'm' in messages.
+When running tests, DB user defined in the settings.py needs to have CREATEDB privileges on the Postgresql : ALTER USER <user-name> CREATEDB;
+   

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if ad %}
+    <h1>Title: {{ad.title}}</h1>
+    
+    <!--<a href="{% url 'ad_messages:ad_list' %}">Back to Ad List</a>-->
+    {% if ad.owner.username == user.username %}
+        <p><a href="{% url 'ad_messages:ad_update' ad.id %}">Update Ad</a></p>
+    {% endif %}
+    <p>Description: {{ad.description}}</p>
+    <p>Price: {{ad.price}} GBP</p>
+    <p>Publication Date: {{ad.pub_date}}</p>
+    <p>Publish: {{ ad.publish }}</p>
+
+
+    {% if ad.owner.username != user.username %}
+        <p>Owner: {{ad.owner}}</p>
+        <p>Favourite: {{ is_favourite }}</p>
+        {% if is_favourite %}
+        <form action="{% url 'ad_messages:detail' ad.id %}" method="post">
+            {% csrf_token %}
+            <!--{{ is_favourite_form }}-->
+            <input type="submit" name="Dislike" value="Remove from Favourites">
+        </form>
+        {% else %}
+        <form action="{% url 'ad_messages:detail' ad.id %}" method="post">
+            {% csrf_token %}
+            <!--{{ is_favourite_form }}-->
+            <input type="submit" name="Like" value="Add to Favourites">
+        </form>
+        {% endif %}
+    {% endif %}
+
+    {% if message_list %}
+        <br>
+        {% for message in message_list %}
+            <li>{{message.sender}} : {{message.text}}  //  {{message.sent_time}}</li>
+        {% endfor %}
+    {% else %}
+        <p>No messages yet.</p>
+    {% endif %}
+
+    {% if can_message_send %}
+        <form action="{% url 'ad_messages:detail' ad.id %}" method="post">
+            {% csrf_token %}
+            {{ form_message }}
+            <input type="submit" name="Message" value="Submit">
+        </form>
+    {% endif %}
+
+{% else %}
+    <p>There is no details about this ad.</p>
+{% endif %}
+
+{% endblock %}
+    

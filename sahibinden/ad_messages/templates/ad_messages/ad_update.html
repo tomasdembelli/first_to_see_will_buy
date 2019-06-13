@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if ad %}
+    <form action="{% url 'ad_messages:ad_update' ad.id %}" method="post">
+        {% csrf_token %}
+        {{ ad_update_form }}
+        <input type="submit" name="ad_update" value="Submit">
+    </form>
+{% else %}
+<p>There is no such ad.</p>
+{% endif %}
+
+{% endblock %}
