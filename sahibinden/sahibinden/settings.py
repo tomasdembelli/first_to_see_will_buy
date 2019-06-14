@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+#decoupling: https://simpleisbetterthancomplex.com/2015/11/26/package-of-the-week-python-decouple.html
+from decouple import config, Csv    #    this will map sensitive variables to .env file
 #from django.urls import reverse
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -21,12 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%f-ppvoml9jv$x-mnb4kj*i4!u8!tz4b=vww8wo#ug28qd4v_p'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definition
@@ -78,17 +80,14 @@ WSGI_APPLICATION = 'sahibinden.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-	'ENGINE': 'django.db.backends.postgresql',
-	'NAME': 'ad_messages',
-	'USER': 'admin_ad_messages',
-	'PASSWORD': '$`Q.x?vxfU,P44hz',
-	'HOST': 'localhost',
-	'PORT': '5432',
+	'ENGINE': config('DB_ENGINE'),
+	'NAME': config('DB_NAME'),
+	'USER': config('DB_USER'),
+	'PASSWORD': config('DB_PASSWORD'),
+	'HOST': config('DB_HOST'),
+	'PORT': config('DB_PORT'),
     }
 }
 
@@ -117,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/London'
+TIME_ZONE = config('TIME_ZONE')
 
 USE_I18N = True
 
@@ -135,7 +134,7 @@ STATIC_URL = '/static/'
 #LOGIN_REDIRECT_URL = '/'    #https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication    
 LOGIN_REDIRECT_URL = 'ad_messages:ad_list'    #https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication    
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    #https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
+EMAIL_BACKEND = config('EMAIL_BACKEND')    #https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
 '''
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
@@ -145,7 +144,8 @@ EMAIL_HOST_PASSWORD = 'x4av7/08}j)|'
 EMAIL_PORT = 587
 '''
 
-GOOGLE_RECAPTCHA_SECRET_KEY = '6Lf7I3AUAAAAACI4GCmiF861H7rD-qFt5sJkSFmv'
+#GOOGLE_RECAPTCHA_SECRET_KEY = '6Lf7I3AUAAAAACI4GCmiF861H7rD-qFt5sJkSFmv'
+GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY')
 
 #for social account login
 AUTHENTICATION_BACKENDS = (
@@ -156,5 +156,5 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 #github settings
-SOCIAL_AUTH_GITHUB_KEY = '962055abf41d3e527466'
-SOCIAL_AUTH_GITHUB_SECRET = '7453ffe12c3e1e25f55b0f3f539a7ca1a8fcd560'
+SOCIAL_AUTH_GITHUB_KEY = config('SOCIAL_AUTH_GITHUB_KEY')
+SOCIAL_AUTH_GITHUB_SECRET = config('SOCIAL_AUTH_GITHUB_SECRET')
