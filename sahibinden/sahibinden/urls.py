@@ -18,6 +18,7 @@ from django.urls import path, include, reverse
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    path('', include('ad_messages.urls')),    #This will be changed when the main app created.
     path('admin/', admin.site.urls),
     path('ad_messages/', include('ad_messages.urls')),
     path('accounts/', include('django.contrib.auth.urls')),

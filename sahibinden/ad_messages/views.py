@@ -31,7 +31,8 @@ from django.contrib import messages
 #USER_LIST = list(filter(lambda x: x.user_name, USERS))
 
 def index(request):
-    return HttpResponse('Hello, world. You are at the sahibinden index.')
+    #return HttpResponse('Hello, world. You are at the sahibinden index.')
+    return HttpResponseRedirect(reverse('ad_messages:ad_list'))
 
 '''
 def ad_list(request):
