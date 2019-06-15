@@ -1,7 +1,7 @@
 # first_to_see_will_buy
-Another second hand stuff selling web site project.
+Another second-hand stuff selling web site project.
 
-This is a simple django web application which is created for the purpose of practicing while learning this very popular and secure web framework.
+This is a simple Django web application which is created for the purpose of practicing while learning this very popular and secure web framework.
 
 Before testing, please check the ".env.example" file and set up the necessary environment and create a new ".env" file with the specific environmental variables.
 
