@@ -13,7 +13,7 @@ Following youtube video shows the current status of the project by demonstrating
 - Add/remove favorites.
 - Unpublish older ads (e.g 2 weeks)
 
-[![DEMO VIDEO](first_to_see_will_buy_demo.png)](https://youtu.be/JASbKDrm7bY){:target="_blank" rel="noopener"}
+[![DEMO VIDEO](first_to_see_will_buy_demo.png)](https://youtu.be/JASbKDrm7bY)
 
 # TODO
 - Add Rest Api.
