@@ -38,9 +38,12 @@ class SignUpForm(UserCreationForm):
     #first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
     #last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
     #email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-    birth_date = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
+    birth_date = forms.DateField(help_text='Optional. Format: YYYY-MM-DD', required=False)
     bio = forms.CharField(widget=forms.Textarea, max_length=500, required=False, help_text='Optional.')
     location = forms.CharField(max_length=30, help_text='Optional.', required=False,)
+    email = forms.EmailField(required=True, help_text='Required,')    # here modfying email field which is actually coming from the buil-in User model
+    first_name = forms.CharField(max_length=30, help_text='Required,', required=True)
+    last_name = forms.CharField(max_length=30, help_text='Required,', required=True)
 
 
     class Meta:

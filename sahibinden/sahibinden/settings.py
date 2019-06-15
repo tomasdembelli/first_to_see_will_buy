@@ -135,6 +135,7 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'ad_messages:ad_list'    #https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication    
 
 EMAIL_BACKEND = config('EMAIL_BACKEND')    #https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
+
 '''
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
