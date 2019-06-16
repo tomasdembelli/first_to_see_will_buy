@@ -33,6 +33,9 @@ class Ad(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ('-pub_date',)    # when querying all ads, they will be ordered by pu_date in reverse order
     
 
 class Message(models.Model):

@@ -23,6 +23,9 @@ import urllib
 import json
 from django.conf import settings
 from django.contrib import messages
+from rest_framework import viewsets
+from .serializers import AdSerializer
+
 
 
 
@@ -45,7 +48,8 @@ def ad_list(request):
     now = timezone.now()
     old = 120    #Ads older than 'old' won't be shown -- this is not working now.
     #ads_list = Ad.objects.filter(pub_date__lte=now).filter(pub_date__gte=(now - datetime.timedelta(days=old))).order_by('-pub_date')[:]    #filters the one published within last 30 days.    
-    ads_list = Ad.objects.order_by('-pub_date')[:]    #filters the one published within last 30 days.    
+    #ads_list = Ad.objects.order_by('-pub_date')[:]    
+    ads_list = Ad.objects.all()   
     #ads_list = Ad.objects.order_by('-pub_date')[:]     
     template = loader.get_template('ad_messages/ad_list.html')
     context = {'ads_list': ads_list,}
@@ -295,3 +299,14 @@ def activate(request, uidb64, token, backend='django.contrib.auth.backends.Model
         return redirect('ad_messages:ad_list')
     else:
         return render(request, 'ad_messages/account_activation_invalid.html')
+
+
+# REST Framework
+class AdListViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows ads to be viewed or edited.
+    """
+    #queryset = Ad.objects.all()
+    #queryset = Ad.objects.order_by('-pub_date')[:]   
+    queryset = Ad.objects.all()   
+    serializer_class = AdSerializer

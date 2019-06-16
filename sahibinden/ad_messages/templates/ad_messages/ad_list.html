@@ -5,7 +5,7 @@
 {% if ads_list %}
     <ul>
         {% for ad in ads_list %}
-            {% if ad.publish %}    <!--second verification for publishing ad, first one is at views.py-->
+            {% if ad.publish %}    <!--verification at model level-->
                 <li>
                     <!--<a href='/ad_messages/ads/{{ad.id}}_{{ad.title | cut:" "}}/'>{{ ad.title }}</a>-->
                     <!--find a way to make this url unique-->
