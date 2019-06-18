@@ -23,8 +23,7 @@ import urllib
 import json
 from django.conf import settings
 from django.contrib import messages
-from rest_framework import viewsets
-from .serializers import AdSerializer
+
 
 
 
@@ -305,6 +304,9 @@ def activate(request, uidb64, token, backend='django.contrib.auth.backends.Model
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics
+from rest_framework import viewsets
+from .serializers import AdSerializer, UserSerializer
+
 
 class AdListViewSet_(viewsets.ModelViewSet):
     """
@@ -312,6 +314,7 @@ class AdListViewSet_(viewsets.ModelViewSet):
     """
     queryset = Ad.objects.all()   
     serializer_class = AdSerializer
+
 
 class AdList(generics.ListCreateAPIView):
     """
@@ -335,3 +338,20 @@ class AdDetailByTitle(generics.ListAPIView):
     lookup_field = 'title'    #if the lookup feel is not the primary key defined in the model
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
+
+
+class UserList(generics.ListAPIView):
+    """
+    API endpoint that allows users to be viewed.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    """
+    API endpoint that allows a specific user to be viewed.
+    """
+    lookup_url_kwarg = 'id'    #id is used in the url conf
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

@@ -19,7 +19,7 @@ class Ad(models.Model):
     title = models.CharField('Title ', max_length=100)
     #ad_category : will be selectable through options 
     #ad_negotiation_history : will show the messages in reverse chronological order
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, related_name='ads', on_delete=models.CASCADE)    #related_name is necessary when reaching to the ads owner has
     description = models.CharField('Description ', max_length=500)
     #ad_zip : will use regex
     price = models.IntegerField('Price ',default=1)

@@ -26,6 +26,8 @@ urlpatterns = [
     path('api/ad_list/', views.AdList.as_view(), name='api_ad_list'),
     path('api/ad_detail/<int:ad_id>/', views.AdDetail.as_view(), name='api_ad_detail'),
     path('api/ad_detail_by_title/<str:ad_title>/', views.AdDetailByTitle.as_view(), name='api_ad_detail_by_title'),
+    path('api/user_list/', views.UserList.as_view(), name='api_user_list'),
+    path('api/user_detail/<int:id>/', views.UserDetail.as_view(), name='api_user_detail'),
 
 ]
 
