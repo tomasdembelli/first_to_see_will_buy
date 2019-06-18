@@ -3,7 +3,8 @@ from . import views
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'ad_list', views.AdListViewSet)
+router.register(r'ad_list_', views.AdListViewSet_)
+#router.register(r'ad_list', views.AdListViewSet.as_view())
 
 
 app_name = 'ad_messages'    # namespacing to differentiate that urls from other apps in templates
@@ -20,8 +21,11 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('account_activation_sent/', views.account_activation_sent, name='account_activation_sent'),
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z\_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activate, name='activate'),
-    path('api/', include(router.urls)),
+    #path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/ad_list/', views.AdList.as_view(), name='api_ad_list'),
+    path('api/ad_detail/<int:ad_id>/', views.AdDetail.as_view(), name='api_ad_detail'),
+    path('api/ad_detail_by_title/<str:ad_title>/', views.AdDetailByTitle.as_view(), name='api_ad_detail_by_title'),
 
 ]
 

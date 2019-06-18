@@ -302,11 +302,36 @@ def activate(request, uidb64, token, backend='django.contrib.auth.backends.Model
 
 
 # REST Framework
-class AdListViewSet(viewsets.ModelViewSet):
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import generics
+
+class AdListViewSet_(viewsets.ModelViewSet):
     """
     API endpoint that allows ads to be viewed or edited.
     """
-    #queryset = Ad.objects.all()
-    #queryset = Ad.objects.order_by('-pub_date')[:]   
     queryset = Ad.objects.all()   
+    serializer_class = AdSerializer
+
+class AdList(generics.ListCreateAPIView):
+    """
+    API endpoint that allows ads to be viewed or edited.
+    """
+    queryset = Ad.objects.all()
+    serializer_class = AdSerializer
+
+
+class AdDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint that allows a specific ad to be viewed or edited.
+    """
+    lookup_url_kwarg = 'ad_id'    #this is mandatory if using a parameter name other than 'pk' in the url configuration of this view.
+    queryset = Ad.objects.all()
+    serializer_class = AdSerializer
+    
+# fix this: this is for a search functionality
+class AdDetailByTitle(generics.ListAPIView):
+    lookup_url_kwarg = 'ad_title'    #this is mandatory if using a parameter name other than 'pk' in the url configuration of this view.
+    lookup_field = 'title'    #if the lookup feel is not the primary key defined in the model
+    queryset = Ad.objects.all()
     serializer_class = AdSerializer
