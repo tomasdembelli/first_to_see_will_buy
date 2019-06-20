@@ -39,7 +39,7 @@ class Ad(models.Model):
     
 
 class Message(models.Model):
-    ad = models.ForeignKey(Ad, on_delete=models.CASCADE)
+    ad = models.ForeignKey(Ad, related_name='messages', on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
     sent_time = models.DateTimeField(auto_now_add=True, )
     sender = models.ForeignKey(User, on_delete=models.CASCADE)

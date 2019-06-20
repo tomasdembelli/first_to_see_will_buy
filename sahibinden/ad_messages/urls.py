@@ -1,6 +1,7 @@
 from django.urls import path, re_path, include
 from . import views
 from rest_framework import routers
+from rest_framework.authtoken.views import obtain_auth_token
 
 router = routers.DefaultRouter()
 router.register(r'ad_list_', views.AdListViewSet_)
@@ -28,6 +29,7 @@ urlpatterns = [
     path('api/ad_detail_by_title/<str:ad_title>/', views.AdDetailByTitle.as_view(), name='api_ad_detail_by_title'),
     path('api/user_list/', views.UserList.as_view(), name='api_user_list'),
     path('api/user_detail/<int:id>/', views.UserDetail.as_view(), name='api_user_detail'),
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'), 
 
 ]
 
