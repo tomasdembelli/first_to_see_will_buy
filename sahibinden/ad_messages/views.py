@@ -306,7 +306,7 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework import viewsets
 from .serializers import AdSerializer, UserSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly, DjangoModelPermissions
 
 
 class AdListViewSet_(viewsets.ModelViewSet):
@@ -321,6 +321,9 @@ class AdList(generics.ListCreateAPIView):
     """
     API endpoint that allows ads to be viewed or edited.
     """
+
+    permission_classes = (IsAuthenticatedOrReadOnly,)    #if not authenticated then read only
+
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
 
@@ -330,7 +333,7 @@ class AdDetail(generics.RetrieveUpdateDestroyAPIView):
     API endpoint that allows a specific ad to be viewed or edited.
     """
     permission_classes = (IsAuthenticated,)
-    
+
     lookup_url_kwarg = 'ad_id'    #this is mandatory if using a parameter name other than 'pk' in the url configuration of this view.
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
@@ -347,6 +350,8 @@ class UserList(generics.ListAPIView):
     """
     API endpoint that allows users to be viewed.
     """
+    permission_classes = (IsAdminUser,)
+
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -355,6 +360,9 @@ class UserDetail(generics.RetrieveAPIView):
     """
     API endpoint that allows a specific user to be viewed.
     """
+
+    #permission_classes = (IsOwnerOrReject)
+
     lookup_url_kwarg = 'id'    #id is used in the url conf
     queryset = User.objects.all()
     serializer_class = UserSerializer
