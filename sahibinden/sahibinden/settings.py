@@ -164,8 +164,8 @@ SOCIAL_AUTH_GITHUB_SECRET = config('SOCIAL_AUTH_GITHUB_SECRET')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        #'rest_framework.authentication.BasicAuthentication',
-        #'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',    #comment out to be able to use token
+        'rest_framework.authentication.SessionAuthentication',    #comment out to be able to use token
         'rest_framework.authentication.TokenAuthentication',
     )
 }

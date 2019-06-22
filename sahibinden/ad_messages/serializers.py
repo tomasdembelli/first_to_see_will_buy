@@ -12,9 +12,9 @@ class MessageSerializer(serializers.ModelSerializer):
 
 
 class AdSerializer(serializers.ModelSerializer):
-    username = serializers.StringRelatedField(source='owner.username')    # without this, it only shows the primary key of the user
+    username = serializers.StringRelatedField(source='owner.username', read_only=True)    # without this, it only shows the primary key of the user
     #messages = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    messages = MessageSerializer(many=True)
+    messages = MessageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Ad

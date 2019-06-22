@@ -307,7 +307,8 @@ from rest_framework import generics
 from rest_framework import viewsets
 from .serializers import AdSerializer, UserSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly, DjangoModelPermissions
-
+from .permissions import CustomDjangoModelPermission
+from django.utils.decorators import method_decorator
 
 class AdListViewSet_(viewsets.ModelViewSet):
     """
@@ -328,6 +329,9 @@ class AdList(generics.ListCreateAPIView):
     serializer_class = AdSerializer
 
 
+@method_decorator(user_is_ad_owner, name='delete')
+@method_decorator(user_is_ad_owner, name='put')
+@method_decorator(user_is_ad_owner, name='patch')
 class AdDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     API endpoint that allows a specific ad to be viewed or edited.
@@ -336,7 +340,9 @@ class AdDetail(generics.RetrieveUpdateDestroyAPIView):
 
     lookup_url_kwarg = 'ad_id'    #this is mandatory if using a parameter name other than 'pk' in the url configuration of this view.
     queryset = Ad.objects.all()
+    #queryset = Ad.objects.filter(owner=self.request.user)
     serializer_class = AdSerializer
+
     
 # fix this: this is for a search functionality
 class AdDetailByTitle(generics.ListAPIView):

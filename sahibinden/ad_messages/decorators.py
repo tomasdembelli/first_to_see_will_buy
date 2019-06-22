@@ -1,7 +1,9 @@
 from django.core.exceptions import PermissionDenied
 from .models import *
+from functools import wraps
 
 def user_is_ad_owner(function):
+    #@wraps(function)
     def wrap(request, *args, **kwargs):
         ad = Ad.objects.get(pk=kwargs['ad_id'])
         if ad.owner == request.user:
@@ -9,5 +11,5 @@ def user_is_ad_owner(function):
         else:
             raise PermissionDenied
     wrap.__doc__ = function.__doc__
-    wrap.__name__ = function.__name__
+    #wrap.__name__ = function.__name__
     return wrap
