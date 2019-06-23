@@ -12,14 +12,23 @@ class MessageSerializer(serializers.ModelSerializer):
 
 
 class AdSerializer(serializers.ModelSerializer):
-    username = serializers.StringRelatedField(source='owner.username', read_only=True)    # without this, it only shows the primary key of the user
     #messages = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+    class Meta:
+        model = Ad
+        fields = ('id','title',)
+        #fields = ('__all__', 'username')
+
+
+class AdDetailSerializer(AdSerializer):
+    username = serializers.StringRelatedField(source='owner.username', read_only=True)    # without this, it only shows the primary key of the user
     messages = MessageSerializer(many=True, read_only=True)
+
 
     class Meta:
         model = Ad
         fields = ('id','title', 'username', 'description', 'price', 'pub_date', 'messages')
-        #fields = '__all__'
+        #fields = ('__all__', 'username', 'messages')
 
 
 class UserSerializer(serializers.ModelSerializer):
