@@ -12,9 +12,9 @@ Following youtube video shows the current status of the project by demonstrating
 - Captcha at signup form.
 - Add/remove favorites.
 - Unpublish older ads (e.g 2 weeks)
+- Rest API
 
 [![DEMO VIDEO](first_to_see_will_buy_demo.png)](https://youtu.be/JASbKDrm7bY)
 
 # TODO
-- Add Rest Api.
 - Create a front end app with React.
