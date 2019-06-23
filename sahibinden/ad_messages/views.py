@@ -103,7 +103,8 @@ def ad_detail(request, ad_id):
     try:
         #last_message_sender = str(Ad.objects.get(id=ad.id).message_set.order_by('-sent_time')[0].sender)
         #last_message_sender = str(Ad.objects.get(id=ad.id).message_set.latest().sender)
-        last_message_sender = str(Ad.objects.get(id=ad.id).message_set.latest('sent_time').sender)
+        #last_message_sender = str(Ad.objects.get(id=ad.id).message_set.latest('sent_time').sender)
+        last_message_sender = str(Ad.objects.get(id=ad.id).messages.latest('sent_time').sender)    #messages is related field
         if last_message_sender == request.user.username:
             can_send_message = False      
         else:
@@ -150,7 +151,8 @@ def ad_detail(request, ad_id):
         form_message = MessageForm()
         #is_favourite_form = FavouriteForm(initial={'is_favourite':is_favourite})
     try:
-        message_list = ad.message_set.order_by('-sent_time')[:]     # !!! how to reach foreignkeyed items !!!
+        #message_list = ad.messages_set.order_by('-sent_time')[:]     # !!! how to reach foreignkeyed items !!!
+        message_list = ad.messages.order_by('-sent_time')[:]     # !!! how to reach foreignkeyed items !!!
     except:
         message_list = []
     context = {'ad': ad, 'message_list': message_list, 'form_message': form_message, 'is_favourite': is_favourite, 'last_message_sender' : last_message_sender, 'can_message_send' : can_send_message,}
@@ -372,3 +374,26 @@ class UserDetail(generics.RetrieveAPIView):
     lookup_url_kwarg = 'id'    #id is used in the url conf
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class MyFavourites(generics.ListAPIView):
+    """
+    API endpoint that allows favourite ads to be viewed.
+    """
+
+    #lookup_url_kwarg = 'user'    #id is used in the url conf
+    #lookup_field = 'user'    #if the lookup feel is not the primary key defined in the model
+    #queryset = FavouriteAd.objects.all()
+    serializer_class = FavouriteSerializer
+
+    #https://www.django-rest-framework.org/api-guide/filtering/
+    def get_queryset(self):
+        """
+        This view should return a list of all the favourites
+        for the currently authenticated user.
+        """
+        user = self.request.user
+        return FavouriteAd.objects.filter(user=user)
+
+
+

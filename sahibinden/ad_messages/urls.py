@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/ad_detail/<int:ad_id>/', views.AdDetail.as_view(), name='api_ad_detail'),
     path('api/ad_detail_by_title/<str:ad_title>/', views.AdDetailByTitle.as_view(), name='api_ad_detail_by_title'),
     path('api/user_list/', views.UserList.as_view(), name='api_user_list'),
+    path('api/my_favourites/', views.MyFavourites.as_view(), name='api_my_favourites'),
     path('api/user_detail/<int:id>/', views.UserDetail.as_view(), name='api_user_detail'),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),    #this for getting the token for a user:  https://simpleisbetterthancomplex.com/tutorial/2018/11/22/how-to-implement-token-authentication-using-django-rest-framework.html
 
