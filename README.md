@@ -13,8 +13,10 @@ Following youtube video shows the current status of the project by demonstrating
 - Add/remove favorites.
 - Unpublish older ads (e.g 2 weeks)
 - Rest API
+- Token based authenticaation
+- Class based generic views for rest API
 
 [![DEMO VIDEO](first_to_see_will_buy_demo.png)](https://youtu.be/JASbKDrm7bY)
 
 # TODO
-- Create a front end app with React.
+- Create a front end app with React or similar framework.
