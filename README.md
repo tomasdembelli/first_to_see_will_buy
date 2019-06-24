@@ -18,7 +18,7 @@ Following youtube video shows the current status of the project by demonstrating
 
 | Ad List      | Ad Detail      | My Favourites   | 
 |------------|-------------|-------------| 
-| ![DRF-Ad List](drf_demo1.png?raw=true "Ad List") | ![DRF-Ad Detail](drf_demo2.png?raw=true "Ad Detail") | | ![DRF-My Favourites](drf_demo3.png?raw=true "My Favourites") |
+| ![DRF-Ad List](drf_demo1.png?raw=true "Ad List") | ![DRF-Ad Detail](drf_demo2.png?raw=true "Ad Detail") | ![DRF-My Favourites](drf_demo3.png?raw=true "My Favourites") |
 
 
 
