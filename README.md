@@ -16,7 +16,11 @@ Following youtube video shows the current status of the project by demonstrating
 - Token based authenticaation
 - Class based generic views for rest API
 
-![DRF-Ad List](drf_demo1.png?raw=true "Title")
+| col 1      | col 2      | 
+|------------|-------------| 
+| ![DRF-Ad List](drf_demo1.png?raw=true "Ad List") | ![DRF-Ad List](drf_demo12.png?raw=true "Ad Detail") |
+
+
 
 [![DEMO VIDEO](first_to_see_will_buy_demo.png)](https://youtu.be/JASbKDrm7bY)
 
