@@ -18,7 +18,7 @@ Following youtube video shows the current status of the project by demonstrating
 
 | col 1      | col 2      | 
 |------------|-------------| 
-| ![DRF-Ad List](drf_demo1.png?raw=true "Ad List") | ![DRF-Ad List](drf_demo12.png?raw=true "Ad Detail") |
+| ![DRF-Ad List](drf_demo1.png?raw=true "Ad List") | ![DRF-Ad Detail](drf_demo2.png?raw=true "Ad Detail") |
 
 
 
