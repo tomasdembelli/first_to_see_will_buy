@@ -253,7 +253,7 @@ def signup(request):
             user.save()
 
             current_site = get_current_site(request)
-            subject = 'Activate Your Sahibinden Account'
+            subject = 'Activate Your FTSWB Account'
             message = render_to_string('ad_messages/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
@@ -262,7 +262,8 @@ def signup(request):
                 'token': account_activation_token.make_token(user),
             })
             user.email_user(subject, message)
-            return redirect('ad_messages:account_activation_sent')
+            #return redirect('ad_messages:account_activation_sent')
+            return HttpResponse(message)    #rendering the activation email for showcase
             #username = form.cleaned_data.get('username')
             #raw_password = form.cleaned_data.get('password1')
             #user = authenticate(username=user.username, password=raw_password)
